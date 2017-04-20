@@ -28,9 +28,9 @@ public class Main {
         List<Salaries> list = SalariesService.makeListFromCSV("src\\data\\Salaries.csv");
         Stream<Salaries> stream = list.stream();
 
-        for (Salaries e : list) {
+        /*for (Salaries e : list) {
             System.out.println(e.getYearID());
-        }
+        }*/
         System.out.println("*********************리스트출력테스트*********************");
 
         //todo: 1. 1900년대 평균연봉을 구하세요(1985~1999)
@@ -62,19 +62,17 @@ public class Main {
         Collection<Salaries> sal2 = list;
 
         // sort사용하여서 최고, 최소를 뽑으면 됨.
-        Stream<List> st = Stream.of(list);
-        Stream<List> sortedStream = st.sorted();
+        //Stream<List> st = Stream.of(list);
 
 
-        /*Collection<Salaries> salMax = list;
+        Collection<Salaries> salMax = list;
         OptionalInt max =
                 salMax.stream()
-
                         .mapToInt(x -> x.getSalary())
                         .max();
 
-        String maxPerson = max.toString();
-        System.out.println("문제3 최고연봉자: " + maxPerson);
+        System.out.println("문제3 최고연봉금액: " + max.getAsInt());
+        System.out.println("문제3 최고연봉자: " );
 
         Collection<Salaries> salMin = list;
         OptionalInt min =
@@ -82,26 +80,31 @@ public class Main {
                         .mapToInt(x -> x.getSalary())
                         .min();
 
-        String minPerson = min.toString();
-        System.out.println("문제3 최소연봉자: " + minPerson.toString());*/
+        System.out.println("문제3 최소연봉금액: " + min.getAsInt());
+        System.out.println("문제3 최소연봉자: " );
+
+
 
         //todo: 4. NL의 최고 연봉자를 구하세요
         Collection<Salaries> salNL = list;
-        OptionalInt maxNL =
-                salNL.stream()
-                        .filter(x -> x.getLgID() == "NL")
+                String s = salNL.stream()
+                        .filter(x -> x.getLgID().equals("NL"))
                         .mapToInt(x -> x.getSalary())
-                        .max();
+                        .max().toString();
 
-        double maxNLResult = maxNL.getAsInt();
-        System.out.println("문제4 NL의 최고 연봉자: " + maxNLResult);
+                for(Salaries e:list){
+                    //최고연봉자 뽑아야함
+                }
+
+        //double maxNLResult = maxNL.getAsInt();
+        System.out.println("문제4 NL의 최고 연봉자: " + s);
 
 
         //todo: 5. NYY 구단의 평균연봉을 구하세요
         Collection<Salaries> salNYY = list;
         OptionalDouble avgNYY =
                 salNYY.stream()
-                        .filter(x -> x.getTeamID() == "NYY")
+                        .filter(x -> x.getTeamID().equals("NYY"))
                         .mapToInt(x -> x.getSalary())
                         .average();
 
